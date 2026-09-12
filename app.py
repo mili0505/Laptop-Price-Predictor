@@ -17,42 +17,55 @@ st.write("Enter the laptop specifications to predict its price.")
 Brand = st.selectbox(
     "Brand",
     [
-        "Dell",
-        "HP",
-        "Lenovo",
         "ASUS",
+        "Lenovo",
+        "HP",
+        "Dell",
         "Acer",
         "MSI",
-        "Apple",
         "Samsung",
+        "Apple",
+        "Infinix",
         "Microsoft",
         "Other"
     ]
 )
 
-RAM_Expandable = st.text_input(
+RAM_Expandable = st.selectbox(
     "RAM Expandable",
-    placeholder="Example: Up to 32 GB"
+    [
+        "Not Expandable",
+        "4 GB Expandable",
+        "8 GB Expandable",
+        "12 GB Expandable",
+        "16 GB Expandable",
+        "32 GB Expandable",
+        "48 GB Expandable",
+        "64 GB Expandable",
+        "Other"
+    ]
 )
 
 RAM_TYPE = st.selectbox(
     "RAM Type",
     [
-        "DDR4",
-        "DDR5",
-        "LPDDR4",
-        "LPDDR4X",
-        "LPDDR5",
-        "LPDDR5X",
-        "DDR3",
-        "Other"
+        "DDR4 RAM",
+        "DDR5 RAM",
+        "LPDDR5 RAM",
+        "LPDDR4X RAM",
+        "LPDDR5X RAM",
+        "DDR3 RAM",
+        "LPDDR3 RAM",
+        "LPDDR4 RAM",
+        "DDR2 RAM",
+        "Unknown"
     ]
 )
 
 Ghz = st.number_input(
     "Processor Speed (GHz)",
-    min_value=0.0,
-    max_value=10.0,
+    min_value=0.5,
+    max_value=6.0,
     value=2.5,
     step=0.1
 )
@@ -64,7 +77,11 @@ GPU_Brand = st.selectbox(
         "NVIDIA",
         "AMD",
         "Apple",
-        "Integrated",
+        "MediaTek",
+        "Qualcomm",
+        "ARM",
+        "Microsoft",
+        "ATI",
         "Other"
     ]
 )
@@ -90,10 +107,7 @@ GPU_Type = st.selectbox(
     [
         "Integrated",
         "Dedicated",
-        "NVIDIA GeForce",
-        "AMD Radeon",
-        "Intel Iris",
-        "Other"
+        "Dedicated/Unknown"
     ]
 )
 
@@ -112,14 +126,19 @@ Processor_Family = st.selectbox(
         "Core i5",
         "Core i7",
         "Core i9",
+        "Core Ultra 5",
+        "Core Ultra 7",
+        "Core Ultra 9",
         "Ryzen 3",
         "Ryzen 5",
         "Ryzen 7",
         "Ryzen 9",
-        "Apple M1",
-        "Apple M2",
-        "Apple M3",
+        "Celeron",
+        "Pentium",
+        "Athlon",
         "Snapdragon",
+        "MediaTek",
+        "Apple",
         "Other"
     ]
 )
@@ -127,17 +146,16 @@ Processor_Family = st.selectbox(
 Laptop_Type = st.selectbox(
     "Laptop Type",
     [
+        "General",
         "Gaming",
-        "Business",
         "Ultrabook",
-        "Student",
-        "2 in 1",
-        "Workstation",
-        "Other"
+        "2-in-1",
+        "Chromebook",
+        "MacBook"
     ]
 )
 
-if st.button("🔮 Predict Laptop Price"):
+if st.button("Predict Laptop Price"):
 
     input_data = pd.DataFrame({
         "Brand": [Brand],
@@ -156,5 +174,5 @@ if st.button("🔮 Predict Laptop Price"):
     prediction = pipe.predict(input_data)[0]
 
     st.success(
-        f"💰 Predicted Laptop Price: ₹{prediction:,.0f}"
+        f"Predicted Laptop Price: ₹{prediction:,.0f}"
     )
